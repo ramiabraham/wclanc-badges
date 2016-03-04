@@ -38,7 +38,7 @@ $badge_front = 'https://2016.lancasterpa.wordcamp.org/files/2016/03/front.jpg';
  * Blank badges!
  * Add the quantity of blank badges you'd like to print
  */
-$badge_blank = '';
+$badge_blank = 'https://2016.lancasterpa.wordcamp.org/files/2016/03/blank.jpg';
 
 
 function render_blanks( $quantity ) {
@@ -86,10 +86,14 @@ function render_blanks( $quantity ) {
 		}
 
 		main {
+			-webkit-column-count: 2;
+         -moz-column-count: 2;
 			column-count: 2;
 		}
 
 		aside {
+			-webkit-column-count: 1;
+         -moz-column-count: 1;
 			column-count: 1;
 		}
 
@@ -270,7 +274,7 @@ function render_blanks( $quantity ) {
 			?>
 			<article class="<?= 'attendee-' . $row['Attendee ID']; ?> badge">
 				<figure>
-					<img src="http://2.gravatar.com/avatar/<?= md5( strtolower( trim( $row['E-mail Address'] ) ) ) ?>?s=500&d=<?=$fallback_wapuu; ?>" />
+					<img src="https://secure.gravatar.com/avatar/<?= md5( strtolower( trim( $row['E-mail Address'] ) ) ) ?>?s=500&d=<?=$fallback_wapuu; ?>" />
 					<figcaption>
 					<? #TODO: switch() to determine if person is attendee, speaker, or volunteer ?>
 						<small><?= str_replace('_',' ', $corporeal_entity_type); ?></small>
@@ -287,10 +291,14 @@ function render_blanks( $quantity ) {
 		fclose( $data );
 	}
 
-	// Render blank badges
-	render_blanks();
 
 	?>
 	</main>
+	<aside>
+
+	// Render blank badges
+	<?= render_blanks(); ?>
+
+	</aside>
 </body>
 </html>
