@@ -43,7 +43,7 @@ $badge_blank = 'https://2016.lancasterpa.wordcamp.org/files/2016/03/blank.jpg';
 
 function render_blanks() {
 
-	$quantity = '20';
+	$quantity = 20;
 
 	$blank  ='<article class="blank"></article>';
 
