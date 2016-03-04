@@ -5,7 +5,7 @@
 * Path to csv file
 * eg camptix-export-2016-03-04.csv
 */
-$filename = 'output_3_4.csv';
+$filename = 'camptix-export-2016-03-04.csv';
 
 /**
 *
@@ -33,6 +33,22 @@ $fallback_wapuu = urlencode( 'https://2016.lancasterpa.wordcamp.org/files/2016/0
  * These are split into two columns with column-count.
  */
 $badge_front = 'https://2016.lancasterpa.wordcamp.org/files/2016/03/front.jpg';
+
+/**
+ * Blank badges!
+ * Add the quantity of blank badges you'd like to print
+ */
+$badge_blank = '';
+
+
+function render_blanks( $quantity ) {
+
+	$quantity = '20';
+
+	$blank  ='<article class="blank"></article>';
+
+	echo str_repeat( $quantity, $blank );
+}
 
 ?>
 <!DOCTYPE html>
@@ -62,26 +78,45 @@ $badge_front = 'https://2016.lancasterpa.wordcamp.org/files/2016/03/front.jpg';
 		* {
 			box-sizing: border-box;
 		}
-		main {
-			column-count: 2;
+		main,
+		aside {
 			display: block;
 			margin: 0 auto;
 			width: 8.5in;
 		}
+
+		main {
+			column-count: 2;
+		}
+
+		aside {
+			column-count: 1;
+		}
+
 		article {
-			font-family: 'montserratregular', sans-serif;
-			width: 4.25in;
 			height: 11in;
-			background: url('<?= $badge_front; ?>') no-repeat center center;
-			background-size: contain;
-			float: left;
 			display: block;
+			width: 8.5in;
 			margin: 0 auto;
-			text-align: center;
 			page-break-before: always;
 			page-break-inside: avoid;
          -webkit-column-break-inside: avoid;
          break-inside: avoid-column;
+			background-size: contain;
+		}
+
+		article.badge {
+			font-family: 'montserratregular', sans-serif;
+			width: 4.25in;
+			background: url('<?= $badge_front; ?>') no-repeat center center;
+			float: left;
+			text-align: center;
+		}
+
+		article.blank {
+			width: 8.5in;
+			float: none;
+			background: url('<?= $badge_blank; ?>') no-repeat center center;
 		}
 
 		figure {
@@ -167,7 +202,6 @@ $badge_front = 'https://2016.lancasterpa.wordcamp.org/files/2016/03/front.jpg';
 							);
 
 	// IDs of all speakers
-	// Note: missing the following: Casey, Cameron
 	$speakers 	= array( '1262',
 								'891',
 								'889',
@@ -187,15 +221,17 @@ $badge_front = 'https://2016.lancasterpa.wordcamp.org/files/2016/03/front.jpg';
 								'955',
 								'1402',
 								'1162',
-								'1529'
-
+								'1529',
+								'1536',
 							);
 
-	// Keynote panel speakers. Missing Cameron, How Carson
+	// Keynote panel speakers.
 	$keynote_panel_speakers = array(
 								'1098',
 								'1110',
-								'1218'
+								'1218',
+								'1537',
+								'1542'
 							);
 
 	if ( $data = fopen( $filename, 'r' ) ) {
@@ -232,7 +268,7 @@ $badge_front = 'https://2016.lancasterpa.wordcamp.org/files/2016/03/front.jpg';
 			}
 
 			?>
-			<article class="<?= 'attendee-' . $row['Attendee ID']; ?>">
+			<article class="<?= 'attendee-' . $row['Attendee ID']; ?> badge">
 				<figure>
 					<img src="http://2.gravatar.com/avatar/<?= md5( strtolower( trim( $row['E-mail Address'] ) ) ) ?>?s=500&d=<?=$fallback_wapuu; ?>" />
 					<figcaption>
@@ -250,6 +286,10 @@ $badge_front = 'https://2016.lancasterpa.wordcamp.org/files/2016/03/front.jpg';
 		// Clean up!
 		fclose( $data );
 	}
+
+	// Render blank badges
+	render_blanks();
+
 	?>
 	</main>
 </body>
