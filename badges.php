@@ -163,7 +163,7 @@ $badge_front = 'https://2016.lancasterpa.wordcamp.org/files/2016/03/front.jpg';
 							);
 
 	// IDs of all speakers
-	// Note: missing the following: Casey, Ellen
+	// Note: missing the following: Casey, Cameron
 	$speakers 	= array( '1262',
 								'891',
 								'889',
@@ -182,7 +182,16 @@ $badge_front = 'https://2016.lancasterpa.wordcamp.org/files/2016/03/front.jpg';
 								'386',
 								'955',
 								'1402',
-								'1162'
+								'1162',
+								'1529'
+
+							);
+
+	// Keynote panel speakers. Missing Cameron, How Carson
+	$keynote_panel_speakers = array(
+								'1098',
+								'1110',
+								'1218'
 							);
 
 	if ( $data = fopen( $filename, 'r' ) ) {
@@ -207,6 +216,9 @@ $badge_front = 'https://2016.lancasterpa.wordcamp.org/files/2016/03/front.jpg';
 			} elseif ( in_array( $row['Attendee ID'], $speakers ) ) {
 				// Our wonderful speakers
 				$corporeal_entity_type = 'speaker';
+			} elseif ( in_array( $row['Attendee ID'], $keynote_panel_speakers ) ) {
+				// Our wonderful speakers
+				$corporeal_entity_type = 'keynote_panel_speaker';
 			} elseif ( $row['Attendee ID'] === '1160' ) {
 				// It's our photographer!
 				$corporeal_entity_type = 'photographer';
@@ -221,7 +233,7 @@ $badge_front = 'https://2016.lancasterpa.wordcamp.org/files/2016/03/front.jpg';
 					<img src="http://2.gravatar.com/avatar/<?= md5( strtolower( trim( $row['E-mail Address'] ) ) ) ?>?s=500&d=<?=$fallback_wapuu; ?>" />
 					<figcaption>
 					<? #TODO: switch() to determine if person is attendee, speaker, or volunteer ?>
-						<small><?= $corporeal_entity_type; ?></small>
+						<small><?= str_replace('_',' ', $corporeal_entity_type); ?></small>
 						<hr />
 						<h3 class="name"><?= $row['First Name'] ?> <?= $row['Last Name'] ?></h3>
 						<h4 class="twitter"><?= $row['Your twitter handle (if you have one)'] ?></h4>
