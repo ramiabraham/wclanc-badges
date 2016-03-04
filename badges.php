@@ -127,6 +127,10 @@ $badge_front = 'https://2016.lancasterpa.wordcamp.org/files/2016/03/front.jpg';
 			font-size: .164in;
 		}
 
+		.attendee-1190 .name {
+			font-size: .15in;
+		}
+
 		.twitter {
 			color: #6986b5;
 		}
