@@ -228,7 +228,7 @@ $badge_front = 'https://2016.lancasterpa.wordcamp.org/files/2016/03/front.jpg';
 			}
 
 			?>
-			<article>
+			<article class="<?= 'attendee-' . $row['Attendee ID']; ?>">
 				<figure>
 					<img src="http://2.gravatar.com/avatar/<?= md5( strtolower( trim( $row['E-mail Address'] ) ) ) ?>?s=500&d=<?=$fallback_wapuu; ?>" />
 					<figcaption>
