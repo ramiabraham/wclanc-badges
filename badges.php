@@ -5,7 +5,7 @@
 * Path to csv file
 * eg camptix-export-2016-03-04.csv
 */
-$filename = 'test.csv';
+$filename = 'output_3_4.csv';
 
 /**
 *
@@ -25,14 +25,14 @@ $corporeal_entity_type = '';
  * The url for a gravatar fallback image;
  * This is used if the person does not have an existing gravatar image k
  */
-$fallback_wapuu = 'https://cldup.com/71dJa8dfxZ.jpg';
+$fallback_wapuu = urlencode( 'https://2016.lancasterpa.wordcamp.org/files/2016/03/fallback.jpg' );
 
 /**
  *
  * The url for the front badge image
  * These are split into two columns with column-count.
  */
-$badge_front = 'https://cldup.com/NdGr3AWuI6.jpg';
+$badge_front = 'https://2016.lancasterpa.wordcamp.org/files/2016/03/front.jpg';
 
 ?>
 <!DOCTYPE html>
@@ -66,7 +66,7 @@ $badge_front = 'https://cldup.com/NdGr3AWuI6.jpg';
 			column-count: 2;
 			display: block;
 			margin: 0 auto;
-			width: max-content;
+			width: 8.5in;
 		}
 		article {
 			font-family: 'montserratregular', sans-serif;
@@ -149,7 +149,8 @@ $badge_front = 'https://cldup.com/NdGr3AWuI6.jpg';
 								'1157',
 								'1121',
 								'1471',
-								'743'
+								'743',
+								'206'
 							);
 
 	// IDs of all organizers
@@ -203,7 +204,7 @@ $badge_front = 'https://cldup.com/NdGr3AWuI6.jpg';
 			} elseif ( in_array( $row['Attendee ID'], $organizers ) ) {
 				// Oh snap it's us
 				$corporeal_entity_type = 'organizer';
-			} elseif ( $row['Coupon'] === 'WONDERFULWCLANCSPEAKER2016' ) {
+			} elseif ( in_array( $row['Attendee ID'], $speakers ) ) {
 				// Our wonderful speakers
 				$corporeal_entity_type = 'speaker';
 			} elseif ( $row['Attendee ID'] === '1160' ) {
@@ -217,7 +218,7 @@ $badge_front = 'https://cldup.com/NdGr3AWuI6.jpg';
 			?>
 			<article>
 				<figure>
-					<img src="http://2.gravatar.com/avatar/<?= md5( strtolower( trim( $row['E-mail Address'] ) ) ) ?>?s=480&d="<?= $fallback_wapuu; ?> />
+					<img src="http://2.gravatar.com/avatar/<?= md5( strtolower( trim( $row['E-mail Address'] ) ) ) ?>?s=500&d=<?=$fallback_wapuu; ?>" />
 					<figcaption>
 					<? #TODO: switch() to determine if person is attendee, speaker, or volunteer ?>
 						<small><?= $corporeal_entity_type; ?></small>
