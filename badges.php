@@ -86,9 +86,9 @@ function render_blanks( $quantity ) {
 		}
 
 		main {
-			-webkit-column-count: 2;
-         -moz-column-count: 2;
-			column-count: 2;
+			-webkit-column-count: ;
+         -moz-column-count: 1;
+			column-count: 1;
 		}
 
 		aside {
@@ -115,12 +115,14 @@ function render_blanks( $quantity ) {
 			background: url('<?= $badge_front; ?>') no-repeat center center;
 			float: left;
 			text-align: center;
+			background-size: contain;
 		}
 
 		article.blank {
 			width: 8.5in;
 			float: none;
 			background: url('<?= $badge_blank; ?>') no-repeat center center;
+			background-size: contain;
 		}
 
 		figure {
