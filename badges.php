@@ -41,7 +41,7 @@ $badge_front = 'https://2016.lancasterpa.wordcamp.org/files/2016/03/front.jpg';
 $badge_blank = 'https://2016.lancasterpa.wordcamp.org/files/2016/03/blank.jpg';
 
 
-function render_blanks( $quantity ) {
+function render_blanks() {
 
 	$quantity = '20';
 
